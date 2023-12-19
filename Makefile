@@ -16,3 +16,8 @@ clean:
 
 fclean: clean
 	@rm $(NAME)
+	@echo "delete pipex"
+
+re: fclean all
+
+.PHONY: all clean fclean re

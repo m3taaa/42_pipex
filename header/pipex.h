@@ -1,19 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmeerber <mmeerber@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/19 21:09:49 by mmeerber          #+#    #+#             */
-/*   Updated: 2023/12/19 21:11:28 by mmeerber         ###   ########.fr       */
+/*   Created: 2023/12/19 21:09:57 by mmeerber          #+#    #+#             */
+/*   Updated: 2023/12/19 21:11:13 by mmeerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/pipex.h"
+#ifndef PIPEX_H
+# define PIPEX_H
 
-int	main()
-{
-	printf("pipex is comming\n");
-	return (0);
-}
+#include <stdio.h>
+
+#endif

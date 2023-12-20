@@ -1,6 +1,8 @@
 NAME = pipex
 CC = gcc
-SRCS =	src/main.c
+SRCS =	src/main.c\
+		src/check_file.c\
+		src/utils.c
 OBJS = $(SRCS:.c=.o)
 CFLAGS = -Werror -Wall -Wextra
 

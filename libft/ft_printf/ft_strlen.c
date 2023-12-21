@@ -1,21 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_file.c                                       :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmeerber <mmeerber@student.s19.be>         +#+  +:+       +#+        */
+/*   By: mmeerber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/19 21:30:53 by mmeerber          #+#    #+#             */
-/*   Updated: 2023/12/20 12:26:05 by mmeerber         ###   ########.fr       */
+/*   Created: 2023/07/11 15:58:58 by mmeerber          #+#    #+#             */
+/*   Updated: 2023/07/11 16:04:29 by mmeerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/pipex.h"
+#include "ft_printf.h"
 
-void	check_file(t_data *data)
+size_t	ft_strlen(const char *s)
 {
-	data->fd_file_1 = open(data->path_file_1, O_WRONLY);
-	if (data->fd_file_1 < 0)
-		error("no such file or directory\n", data);
-	return ;
+	size_t	x;
+
+	x = 0;
+	while (s[x] != '\0')
+		x++;
+	return (x);
 }

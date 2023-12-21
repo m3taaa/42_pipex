@@ -1,37 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmeerber <mmeerber@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/19 21:09:57 by mmeerber          #+#    #+#             */
-/*   Updated: 2023/12/20 12:26:27 by mmeerber         ###   ########.fr       */
+/*   Created: 2023/04/11 12:58:08 by mmeerber          #+#    #+#             */
+/*   Updated: 2023/05/10 12:09:40 by mmeerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#include "libft.h"
 
-#include <stdio.h>
-#include <unistd.h>
-#include <fcntl.h>
-#include <stdlib.h>
-#include "../libft/libft_and_more.h"
-
-typedef struct s_data
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	char	*path_file_1;
-	char	*path_file_2;
-	char	*cmd1;
-	char	*cmd2;
-	int		fd_file_1;
-	int		fd_file_2;
-} t_data;
+	size_t	i;
 
-void	error(char *msg, t_data *data);
-void	check_file(t_data *data);
-//DEV
-void	print_data(t_data *data);
-
-#endif
+	i = 0;
+	while (i < n)
+	{
+		if (((unsigned char *)s1)[i] != ((unsigned char *)s2)[i])
+			return (*(unsigned char *)(s1 + i) - *(unsigned char *)(s2 + i));
+		i++;
+	}
+	return (0);
+}

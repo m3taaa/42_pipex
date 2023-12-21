@@ -6,7 +6,7 @@
 /*   By: mmeerber <mmeerber@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 21:09:49 by mmeerber          #+#    #+#             */
-/*   Updated: 2023/12/20 10:35:02 by mmeerber         ###   ########.fr       */
+/*   Updated: 2023/12/20 12:30:54 by mmeerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ void	init_data(t_data *data)
 	data->cmd2 = NULL;
 	data->path_file_1 = NULL;
 	data->path_file_2 = NULL;
-	data->fd_file_1 = 0;
-	data->fd_file_2 = 0;
 }
 
 void	get_data(t_data *data, char **ag)
@@ -39,5 +37,6 @@ int	main(int ac, char **ag)
 	init_data(&data);
 	get_data(&data, ag);
 	check_file(&data);
+	ft_printf("end of pipex\n");
 	return (0);
 }

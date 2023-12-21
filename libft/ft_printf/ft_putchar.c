@@ -1,21 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_file.c                                       :+:      :+:    :+:   */
+/*   ft_putchar.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmeerber <mmeerber@student.s19.be>         +#+  +:+       +#+        */
+/*   By: mmeerber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/19 21:30:53 by mmeerber          #+#    #+#             */
-/*   Updated: 2023/12/20 12:26:05 by mmeerber         ###   ########.fr       */
+/*   Created: 2023/07/11 13:07:12 by mmeerber          #+#    #+#             */
+/*   Updated: 2023/07/13 16:20:32 by mmeerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/pipex.h"
+#include "ft_printf.h"
 
-void	check_file(t_data *data)
+int	ft_putchar(char c)
 {
-	data->fd_file_1 = open(data->path_file_1, O_WRONLY);
-	if (data->fd_file_1 < 0)
-		error("no such file or directory\n", data);
-	return ;
+	int	count;
+
+	count = 0;
+	count = write(1, &c, 1);
+	return (count);
 }

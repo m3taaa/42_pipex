@@ -5,18 +5,22 @@ SRCS =	src/main.c\
 		src/utils.c
 OBJS = $(SRCS:.c=.o)
 CFLAGS = -Werror -Wall -Wextra
+INCLUDES = libft/libft_and_more.a
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	@$(CC) $(OBJS) -o $(NAME)
+	@make -C libft/ > /dev/null 2>&1
+	@$(CC) $(OBJS) $(INCLUDES) -o $(NAME) > /dev/null 2>&1
 	@echo "pipex create"
 
 clean:
+	@make -C libft/ clean > /dev/null 2>&1
 	@rm -f $(OBJS)
 	@echo "delete file *.o"
 
 fclean: clean
+	@make -C libft/ fclean > /dev/null 2>&1
 	@rm $(NAME)
 	@echo "delete pipex"
 

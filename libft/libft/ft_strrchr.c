@@ -1,37 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmeerber <mmeerber@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/19 21:09:57 by mmeerber          #+#    #+#             */
-/*   Updated: 2023/12/20 12:26:27 by mmeerber         ###   ########.fr       */
+/*   Created: 2023/04/06 11:50:46 by mmeerber          #+#    #+#             */
+/*   Updated: 2023/05/10 13:14:06 by mmeerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#include "libft.h"
 
-#include <stdio.h>
-#include <unistd.h>
-#include <fcntl.h>
-#include <stdlib.h>
-#include "../libft/libft_and_more.h"
-
-typedef struct s_data
+char	*ft_strrchr(const char *s, int c)
 {
-	char	*path_file_1;
-	char	*path_file_2;
-	char	*cmd1;
-	char	*cmd2;
-	int		fd_file_1;
-	int		fd_file_2;
-} t_data;
+	int	x;
 
-void	error(char *msg, t_data *data);
-void	check_file(t_data *data);
-//DEV
-void	print_data(t_data *data);
-
-#endif
+	x = 0;
+	while (s[x])
+		x++;
+	while (x >= 0)
+	{
+		if (s[x] == (char)c)
+			return ((char *)(s + x));
+		x--;
+	}
+	return (NULL);
+}

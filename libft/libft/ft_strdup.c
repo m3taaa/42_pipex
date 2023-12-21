@@ -1,37 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmeerber <mmeerber@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/19 21:09:57 by mmeerber          #+#    #+#             */
-/*   Updated: 2023/12/20 12:26:27 by mmeerber         ###   ########.fr       */
+/*   Created: 2023/04/12 18:38:56 by mmeerber          #+#    #+#             */
+/*   Updated: 2023/05/10 12:54:19 by mmeerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#include "libft.h"
 
-#include <stdio.h>
-#include <unistd.h>
-#include <fcntl.h>
-#include <stdlib.h>
-#include "../libft/libft_and_more.h"
-
-typedef struct s_data
+static void	ft_strcpy(char *src, char *dest)
 {
-	char	*path_file_1;
-	char	*path_file_2;
-	char	*cmd1;
-	char	*cmd2;
-	int		fd_file_1;
-	int		fd_file_2;
-} t_data;
+	int	x;
 
-void	error(char *msg, t_data *data);
-void	check_file(t_data *data);
-//DEV
-void	print_data(t_data *data);
+	x = 0;
+	while (src[x] != '\0')
+	{
+		dest[x] = src[x];
+		x++;
+	}
+	dest[x] = '\0';
+}
 
-#endif
+char	*ft_strdup(char *src)
+{
+	char	*dest;
+
+	dest = malloc(sizeof(char) * ft_strlen(src) + 1);
+	if (dest == NULL)
+		return (NULL);
+	ft_strcpy(src, dest);
+	return (dest);
+}

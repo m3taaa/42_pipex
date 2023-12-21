@@ -1,37 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmeerber <mmeerber@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/19 21:09:57 by mmeerber          #+#    #+#             */
-/*   Updated: 2023/12/20 12:26:27 by mmeerber         ###   ########.fr       */
+/*   Created: 2023/04/05 18:28:25 by mmeerber          #+#    #+#             */
+/*   Updated: 2023/05/10 13:25:43 by mmeerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#include "libft.h"
 
-#include <stdio.h>
-#include <unistd.h>
-#include <fcntl.h>
-#include <stdlib.h>
-#include "../libft/libft_and_more.h"
-
-typedef struct s_data
+int	ft_toupper(int c)
 {
-	char	*path_file_1;
-	char	*path_file_2;
-	char	*cmd1;
-	char	*cmd2;
-	int		fd_file_1;
-	int		fd_file_2;
-} t_data;
+	int	res;
 
-void	error(char *msg, t_data *data);
-void	check_file(t_data *data);
-//DEV
-void	print_data(t_data *data);
-
-#endif
+	if (c < 123 && c > 96)
+	{
+		res = c - 32;
+		return (res);
+	}
+	else
+		return (c);
+}

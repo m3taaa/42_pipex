@@ -6,15 +6,18 @@
 /*   By: mmeerber <mmeerber@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 21:39:05 by mmeerber          #+#    #+#             */
-/*   Updated: 2023/12/20 10:32:32 by mmeerber         ###   ########.fr       */
+/*   Updated: 2023/12/20 12:30:33 by mmeerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/pipex.h"
 
-void	error(char *msg)
+void	error(char *msg, t_data *data)
 {
-	write(2, msg, strlen(msg));
+	if (data->fd_file_1 < 0)
+		close(data);
+	write(2, msg, ft_strlen(msg));
+	exit(1);
 }
 
 void	print_data(t_data *data)

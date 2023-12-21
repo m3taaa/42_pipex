@@ -1,21 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_file.c                                       :+:      :+:    :+:   */
+/*   ft_hexa_maj.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmeerber <mmeerber@student.s19.be>         +#+  +:+       +#+        */
+/*   By: mmeerber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/19 21:30:53 by mmeerber          #+#    #+#             */
-/*   Updated: 2023/12/20 12:26:05 by mmeerber         ###   ########.fr       */
+/*   Created: 2023/07/13 15:34:44 by mmeerber          #+#    #+#             */
+/*   Updated: 2023/07/13 15:49:24 by mmeerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/pipex.h"
+#include "ft_printf.h"
 
-void	check_file(t_data *data)
+int	ft_hexa_maj(unsigned int n, char *hex)
 {
-	data->fd_file_1 = open(data->path_file_1, O_WRONLY);
-	if (data->fd_file_1 < 0)
-		error("no such file or directory\n", data);
-	return ;
+	int	count;
+
+	count = 1;
+	if (n >= 16)
+		count += ft_hexa_min(n / 16, hex);
+	write(1, &hex[n % 16], 1);
+	return (count);
 }

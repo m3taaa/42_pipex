@@ -1,21 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_file.c                                       :+:      :+:    :+:   */
+/*   ft_nbr_no_neg.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmeerber <mmeerber@student.s19.be>         +#+  +:+       +#+        */
+/*   By: mmeerber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/19 21:30:53 by mmeerber          #+#    #+#             */
-/*   Updated: 2023/12/20 12:26:05 by mmeerber         ###   ########.fr       */
+/*   Created: 2023/07/13 14:58:01 by mmeerber          #+#    #+#             */
+/*   Updated: 2023/07/15 15:52:51 by mmeerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/pipex.h"
+#include "ft_printf.h"
 
-void	check_file(t_data *data)
+int	ft_nbr_no_neg(long long nb)
 {
-	data->fd_file_1 = open(data->path_file_1, O_WRONLY);
-	if (data->fd_file_1 < 0)
-		error("no such file or directory\n", data);
-	return ;
+	int				count;
+	unsigned long	x;
+
+	x = 4294967295;
+	if (nb < 0)
+	{
+		nb += 1;
+		x = x - (-nb);
+		nb = x;
+	}
+	count = 0;
+	count = ft_putnbr(nb);
+	return (count);
 }

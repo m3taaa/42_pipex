@@ -6,7 +6,7 @@
 /*   By: mmeerber <mmeerber@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 21:09:49 by mmeerber          #+#    #+#             */
-/*   Updated: 2023/12/20 12:30:54 by mmeerber         ###   ########.fr       */
+/*   Updated: 2023/12/23 18:03:16 by mmeerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,11 @@ int	main(int ac, char **ag)
 {
 	t_data data;
 
-	if (ac < 5)
+	if (ac != 5)
 		return (0);
 	init_data(&data);
 	get_data(&data, ag);
 	check_file(&data);
-	ft_printf("end of pipex\n");
+	execv(data.cmd1, ag);
 	return (0);
 }

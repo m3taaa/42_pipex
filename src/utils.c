@@ -6,7 +6,7 @@
 /*   By: mmeerber <mmeerber@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 21:39:05 by mmeerber          #+#    #+#             */
-/*   Updated: 2023/12/23 17:26:11 by mmeerber         ###   ########.fr       */
+/*   Updated: 2023/12/25 16:04:37 by mmeerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 
 void	error(char *msg, t_data *data)
 {
-	if (data->fd_file_1 > 0)
-		close(data->fd_file_1);
+	data = NULL;
 	write(2, msg, ft_strlen(msg));
 	exit(1);
 }

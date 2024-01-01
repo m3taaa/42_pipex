@@ -13,7 +13,7 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	@make -C libft/ > /dev/null 2>&1
 	@$(CC) $(OBJS) $(INCLUDES) -o $(NAME)
-	@echo "\n\x1B[32mPipex Compiled!\n"
+	@echo "Pipex Compiled!"
 
 clean:
 	@make -C libft/ clean > /dev/null 2>&1

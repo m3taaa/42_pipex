@@ -19,27 +19,16 @@
 #include <stdlib.h>
 #include "../libft/libft_and_more.h"
 
-typedef struct s_command
-{
-	char	*env;
-	char	*arg;
-} t_command;
-
 typedef struct s_data
 {
-	char		*path_file_1;
-	char		*path_file_2;
-	char		*cmd1;
-	char		*cmd2;
-	char		*path_envp;
-	char		**path_list;
-	t_command	*first_command;
-	t_command	*second_command;
+	char	*binary;
+	char	*arg;
+	char	*file;
+	char	**path;
+	char	*path_binary;
 } t_data;
 
-void	error(char *msg, t_data *data);
-void	init_data(t_data *data);
-//DEV
-void	print_data(t_data *data);
+void	error(char *msg);
+void	init_data();
 
 #endif

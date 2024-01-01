@@ -12,17 +12,8 @@
 
 #include "../header/pipex.h"
 
-void	error(char *msg, t_data *data)
+void	error(char *msg)
 {
-	data = NULL;
 	write(2, msg, ft_strlen(msg));
 	exit(1);
-}
-
-void	print_data(t_data *data)
-{
-	printf("path file1 = %s\n", data->path_file_1);
-	printf("path file2 = %s\n", data->path_file_2);
-	printf("cmd1 = %s\n", data->cmd1);
-	printf("cmd2 = %s\n", data->cmd2);
 }

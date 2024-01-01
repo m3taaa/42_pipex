@@ -12,14 +12,7 @@
 
 #include "../header/pipex.h"
 
-void	init_data(t_data *data)
+void	init_data()
 {
-	data->cmd1 = NULL;
-	data->cmd2 = NULL;
-	data->path_file_1 = NULL;
-	data->path_file_2 = NULL;
-	data->path_envp = NULL;
-	data->path_list = NULL;
-	data->first_command = NULL;
-	data->second_command = NULL;
+	return ;
 }

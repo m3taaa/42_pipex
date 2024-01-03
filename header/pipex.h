@@ -22,7 +22,7 @@
 typedef struct s_data
 {
 	char	*binary;
-	char	*arg;
+	char	**arg;
 	char	*file;
 	char	**path;
 	char	*path_binary;

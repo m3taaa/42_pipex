@@ -1,67 +1,95 @@
 #include "../header/pipex.h"
+#include <stdlib.h>
 
-char	*find_path(char **envp)
+char	**find_path(char **envp)
 {
-	int	x;
-	int	path;
+	int x;
+	int return_path;
+	char	**path;
 
 	x = 0;
 	while (envp[x])
 	{
-		path = ft_strncmp(envp[x], "PATH", 4);
-		if (path == 0)
-			return (envp[x]);
+		return_path = ft_strncmp(envp[x], "PATH", 4);
+		if (return_path == 0)
+		{
+			path = ft_split(envp[x], '=');
+			path = ft_split(path[1], ':');
+			return (path);
+		}
 		x++;
 	}
-	return 0;
+	return (NULL);
 }
 
-char	*search_binary(t_data *data)
+char	*find_binary(char *binary, char **envp_path)
 {
-	int		res;
-	int		x;
 	char	*temp;
+	int	res;
+	int x;
 
 	x = 0;
-	while (data->path[x])
+	while (envp_path[x])
 	{
-		temp = ft_strjoin(data->path[x], data->binary);
+		temp = ft_strjoin(envp_path[x], binary);
 		res = access(temp, X_OK);
 		if (res == 0)
 			return (temp);
 		x++;
 	}
-	return (0);
+	return (NULL);
 }
 
-void	get_data(char **ag, t_data *data, char **envp)
+void	run_cmd(char *ag, char **envp)
 {
-	char	**temp;
-	char	*path;
+	char	**args;
+	char	**envp_path;
+	char	*binary;
 
-	temp = ft_split(ag[2], ' ');
-	data->binary = temp[0];
-	data->binary = ft_strjoin("/", data->binary);
-	data->arg = temp[1];
-	data->file = ag[1];
-	path = find_path(envp);
-	if (path == 0)
-		error("not find PATH in envp\n");
-	data->path = ft_split(path, '=');
-	data->path = ft_split(data->path[1], ':');
-	data->path_binary = search_binary(data);
-	if (data->path_binary == 0)
-		error("not found binary\n");
-	printf("end of get_data\n");
+	envp_path = find_path(envp);
+	if (envp_path == NULL)
+		error("not find variable PATH in env");
+	args = ft_split(ag, ' ');
+	binary = ft_strjoin("/", args[0]);
+	binary = find_binary(binary, envp_path);
+	execve(binary, args, envp);
 }
 
 int	main(int ac, char **ag, char **envp)
 {
-	t_data data;
-	if (ac != 5)
-		error("Error start pipex\n");
-	get_data(ag, &data, envp);
-	//execve(data.path_binary, );
-	printf("end\n");
+	pid_t	child;
+	int		fd[2];
+	int		status;
+	int		return_error;
+	int		fd_child;
+	int		fd_parent;
+
+	if (ac < 5)
+		error("Error syntax pipex\n");
+	return_error = pipe(fd);
+	if (return_error == -1)
+		error("pip error\n");
+	child = fork();
+	if (child == 0)
+	{
+		fd_child = open(ag[1], O_RDONLY, 0777);
+		dup2(fd[1], STDOUT_FILENO);
+		dup2(fd_child, STDIN_FILENO);
+		close(fd[0]);
+		run_cmd(ag[2], envp);
+		ft_printf("child\n");
+	}
+	else
+	{
+		fd_parent = open(ag[4], O_WRONLY | O_TRUNC | O_CREAT, 0777);
+		return_error = waitpid(child, &status, 0);
+		if (return_error == -1)
+			error("waitpid error\n");
+		dup2(fd[0], STDIN_FILENO);
+		dup2(fd_parent, STDOUT_FILENO);
+		close(fd[1]);
+		run_cmd(ag[3], envp);
+		ft_printf("parent\n");
+	}
 	return (0);
 }

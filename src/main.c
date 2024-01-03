@@ -77,7 +77,6 @@ int	main(int ac, char **ag, char **envp)
 		dup2(fd_child, STDIN_FILENO);
 		close(fd[0]);
 		run_cmd(ag[2], envp);
-		ft_printf("child\n");
 	}
 	else
 	{
@@ -89,7 +88,6 @@ int	main(int ac, char **ag, char **envp)
 		dup2(fd_parent, STDOUT_FILENO);
 		close(fd[1]);
 		run_cmd(ag[3], envp);
-		ft_printf("parent\n");
 	}
 	return (0);
 }

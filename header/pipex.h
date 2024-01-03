@@ -19,16 +19,6 @@
 #include <stdlib.h>
 #include "../libft/libft_and_more.h"
 
-typedef struct s_data
-{
-	char	*binary;
-	char	**arg;
-	char	*file;
-	char	**path;
-	char	*path_binary;
-} t_data;
-
 void	error(char *msg);
-void	init_data();
 
 #endif

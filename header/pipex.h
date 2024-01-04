@@ -6,7 +6,7 @@
 /*   By: mmeerber <mmeerber@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 21:09:57 by mmeerber          #+#    #+#             */
-/*   Updated: 2023/12/25 17:57:02 by mmeerber         ###   ########.fr       */
+/*   Updated: 2024/01/03 07:36:08 by mmeerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,8 @@
 #include "../libft/libft_and_more.h"
 
 void	error(char *msg);
+void	run_cmd(char *ag, char **envp);
+char	**find_path(char **envp);
+char	*find_binary(char *binary, char **envp_path);
 
 #endif

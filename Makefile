@@ -1,9 +1,7 @@
 NAME = pipex
 CC = gcc
 SRCS =	src/main.c\
-		src/check_file.c\
 		src/utils.c\
-		src/init.c
 OBJS = $(SRCS:.c=.o)
 CFLAGS = -Werror -Wall -Wextra
 INCLUDES = libft/libft_and_more.a

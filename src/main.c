@@ -1,68 +1,51 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mmeerber <mmeerber@student.s19.be>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/03 07:32:04 by mmeerber          #+#    #+#             */
+/*   Updated: 2024/01/04 13:28:16 by mmeerber         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../header/pipex.h"
-#include <stdlib.h>
 
-char	**find_path(char **envp)
+void	child_process(int	*fd, char **ag, char **envp)
 {
-	int x;
-	int return_path;
-	char	**path;
+	int fd_child;
 
-	x = 0;
-	while (envp[x])
-	{
-		return_path = ft_strncmp(envp[x], "PATH", 4);
-		if (return_path == 0)
-		{
-			path = ft_split(envp[x], '=');
-			path = ft_split(path[1], ':');
-			return (path);
-		}
-		x++;
-	}
-	return (NULL);
+	fd_child = open(ag[1], O_RDONLY, 0777);
+	if (fd_child == -1)
+		error("file not found\n");
+	dup2(fd_child, STDOUT_FILENO);
+	dup2(fd[1], STDIN_FILENO);
+	close(fd[0]);
+	run_cmd(ag[2], envp);
 }
 
-char	*find_binary(char *binary, char **envp_path)
+void	parent_process(int *fd, char **ag, char **envp, pid_t child)
 {
-	char	*temp;
-	int	res;
-	int x;
+	int fd_parent;
+	int	status;
+	int	return_error;
 
-	x = 0;
-	while (envp_path[x])
-	{
-		temp = ft_strjoin(envp_path[x], binary);
-		res = access(temp, X_OK);
-		if (res == 0)
-			return (temp);
-		x++;
-	}
-	return (NULL);
-}
-
-void	run_cmd(char *ag, char **envp)
-{
-	char	**args;
-	char	**envp_path;
-	char	*binary;
-
-	envp_path = find_path(envp);
-	if (envp_path == NULL)
-		error("not find variable PATH in env");
-	args = ft_split(ag, ' ');
-	binary = ft_strjoin("/", args[0]);
-	binary = find_binary(binary, envp_path);
-	execve(binary, args, envp);
+	fd_parent = open(ag[4], O_WRONLY | O_TRUNC | O_CREAT, 0777);
+	return_error = waitpid(child, &status, 0);
+	if (return_error == -1)
+		error("waitpid error\n");
+	dup2(fd[0], STDIN_FILENO);
+	dup2(fd_parent, STDOUT_FILENO);
+	close(fd[1]);
+	run_cmd(ag[3], envp);
 }
 
 int	main(int ac, char **ag, char **envp)
 {
 	pid_t	child;
 	int		fd[2];
-	int		status;
 	int		return_error;
-	int		fd_child;
-	int		fd_parent;
 
 	if (ac < 5)
 		error("Error syntax pipex\n");
@@ -71,23 +54,21 @@ int	main(int ac, char **ag, char **envp)
 		error("pip error\n");
 	child = fork();
 	if (child == 0)
-	{
-		fd_child = open(ag[1], O_RDONLY, 0777);
+		child_process(fd, ag, envp);
+		/*fd_child = open(ag[1], O_RDONLY, 0777);
 		dup2(fd[1], STDOUT_FILENO);
 		dup2(fd_child, STDIN_FILENO);
 		close(fd[0]);
-		run_cmd(ag[2], envp);
-	}
+		run_cmd(ag[2], envp);*/
 	else
-	{
-		fd_parent = open(ag[4], O_WRONLY | O_TRUNC | O_CREAT, 0777);
+		parent_process(fd, ag, envp, child);
+		/*fd_parent = open(ag[4], O_WRONLY | O_TRUNC | O_CREAT, 0777);
 		return_error = waitpid(child, &status, 0);
 		if (return_error == -1)
 			error("waitpid error\n");
 		dup2(fd[0], STDIN_FILENO);
 		dup2(fd_parent, STDOUT_FILENO);
 		close(fd[1]);
-		run_cmd(ag[3], envp);
-	}
+		run_cmd(ag[3], envp);*/
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: mmeerber <mmeerber@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 07:32:04 by mmeerber          #+#    #+#             */
-/*   Updated: 2024/01/05 15:41:00 by mmeerber         ###   ########.fr       */
+/*   Updated: 2024/01/05 15:44:29 by mmeerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	child_process(int *fd, char **ag, char **envp)
 {
-	int fd_child;
+	int	fd_child;
 	int	return_error;
 
 	fd_child = open(ag[1], O_RDONLY);

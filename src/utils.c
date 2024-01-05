@@ -6,16 +6,17 @@
 /*   By: mmeerber <mmeerber@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 21:39:05 by mmeerber          #+#    #+#             */
-/*   Updated: 2024/01/03 07:42:28 by mmeerber         ###   ########.fr       */
+/*   Updated: 2024/01/05 00:13:39 by mmeerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/pipex.h"
+#include <stdlib.h>
 
 void	error(char *msg)
 {
 	write(2, msg, ft_strlen(msg));
-	exit(1);
+	exit(EXIT_FAILURE);
 }
 
 char	**find_path(char **envp)

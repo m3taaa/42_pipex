@@ -6,7 +6,7 @@
 /*   By: mmeerber <mmeerber@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 21:39:05 by mmeerber          #+#    #+#             */
-/*   Updated: 2024/01/05 00:13:39 by mmeerber         ###   ########.fr       */
+/*   Updated: 2024/01/05 16:46:27 by mmeerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ void	run_cmd(char *ag, char **envp)
 	char	**args;
 	char	**envp_path;
 	char	*binary;
+	int		return_error;
 
 	envp_path = find_path(envp);
 	if (envp_path == NULL)
@@ -70,5 +71,9 @@ void	run_cmd(char *ag, char **envp)
 	args = ft_split(ag, ' ');
 	binary = ft_strjoin("/", args[0]);
 	binary = find_binary(binary, envp_path);
-	execve(binary, args, envp);
+	if (binary == NULL)
+		error("command not found\n");
+	return_error = execve(binary, args, envp);
+	if (return_error == -1)
+		error("error execve\n");
 }
